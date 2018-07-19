@@ -1,0 +1,18 @@
+O OC2R (OpenSource Contextual Optical Character Recognition) é um software opensource que teve início com o desenvolvimento do TCC (Trabalho de conclusão de curso) de Gutto Silva, no curso de BSI (Bacharelado em Sistemas de Informação) pela UFRN, polo CERES/CAICO. Sua finalidade inicial foi criar um sistema de reconhecimento de caracteres, mais conhecido como OCR, que, além do reconhecimento ótico, utilizasse tecnicas de predição estatística para inserir cada caracter pré-reconhecido, dentro de um contexto (Palavra, Linha), na tentativa de corrigir possiveis falhas durante a fase do reconhecimento.
+
+O OC2R foi desenvolvido de forma modular, e, na versão atual, o mesmo possui quatro módulos a citar:
+
+- Vision module [1]
+- Data process module [2]
+- Brain module [3]
+- OCR module [4]
+
+
+[1]- O Vision module é responsável pelo processamento de imagem e pela criação das estruturas necessárias para que as informações obtidas como o processamento da imagem possam ser manipuladas. Ex.: Contour struct, Image struct and Image object struct.
+
+[2]- O Data process module é responsável por processar os objetos(dados) obtidos com o processamento de imagem, feito pelo módulo de visão, e criar e salvar dados que possam ser usados para o treinamento de redes neurais. Tal modulo pode ser modificado para que os dados sejam criados de acordo com a necessidade do usuário. 
+
+[3]- O Brain module, como o nome sugere, é o cérebro do sistema. É nesse módulo que redes neurais são criadas e treinadas, bem como outros algoritmos que serão utilizado para fazer o reconhecimento dos objetos obtidos pelo processamento de imagem.
+
+[4]- Por último, o OCR module é a parte do sistema responsável por fazer a integração entre o Vision module e o Brain module, e criar as estruturas textuais (caracteres, palavras, linhas, etc.) utilizando as informações obtidas pelo reconhecimento dos objetos de imagem feito pelos algoritmos do Brain module.
+

@@ -1,0 +1,19 @@
+Manual de normas do programador que deseja contribuir para o OC2R ou COCADOCR
+
+* Dos arquivos de código .c
+
+- É desejável que cada .c possua um .h com os cabeçalhos das funções bem como com MACROS ou Estruturas.
+
+- O acesso aos elementos de uma estrutura deve ser feito, salvo dentro do próprio .c, por meio de funções get e set.
+
+- Dentro do .c o acesso aos elementos de sua estrutra deve ser feito de forma direta.
+
+- Cada função deve analisar os seus parâmetros antes do uso, em busca de alguma irregularidade. Caso
+encontre irregularidades, retornar um código(ERRO, WARNING, ..) referente ao que se passa.
+
+- Cada estrutura deve ter uma função responsável por desalocar o seu conteúdo. Além disso
+cada estrutura deve possuir um ponteiro para a função de dealloc. 
+
+ 
+
+

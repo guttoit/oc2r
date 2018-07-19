@@ -1,0 +1,391 @@
+#Makefile, make all project
+
+# compilador
+CC=gcc -g
+
+CC_F=gcc -g -Wall
+
+# opcoes de compilacao
+FLAGS =-Wall
+
+# variaveis com diretorios
+LIB=./lib
+OBJ=./obj
+SRC=./src
+
+
+###Dirs
+
+BRAIN=brain
+
+DATA_P=data_process
+
+STRUCT=data_structure
+
+MAIN=main
+
+MSG_HAND=msg_handling
+
+OCR=ocr
+
+OCR_T=ocr_training
+
+USER_I=user_interface
+
+UTIL=util
+
+VISION=vision
+
+
+###Caminhos para as pastas mais em baixo na arvore do projeto
+##PS = path para src/ e PO = path para obj/
+#Entao, PSTRUCT = src/data_structure/ e PSMSG = src/error_handling/
+#da mesma forma que POMSG = obj/error_handling
+
+#PSS = path para pastas filhas da src/data_structure assim como POS.
+#Então, PSBRAIN = src/data_structure/brain_structure
+#e POBRAIN = obj/data_structure/brain_structure
+
+PSBRAIN=$(SRC)/$(BRAIN)
+POBRAIN=$(OBJ)/$(BRAIN)
+
+PSDATAP=$(SRC)/$(DATA_P)
+PODATAP=$(OBJ)/$(DATA_P)
+
+PSSTRUCT=$(SRC)/$(STRUCT)
+POSTRUCT=$(OBJ)/$(STRUCT)
+
+PSMAIN=$(SRC)/$(MAIN)
+POMAIN=$(OBJ)/$(MAIN)
+
+PSMSG=$(SRC)/$(MSG_HAND)
+POMSG=$(OBJ)/$(MSG_HAND)
+
+PSOCR=$(SRC)/$(OCR)
+POOCR=$(OBJ)/$(OCR)
+
+PSOCRT=$(SRC)/$(OCR_T)
+POOCRT=$(OBJ)/$(OCR_T)
+
+PSUSERI=$(SRC)/$(USER_I)
+POUSERI=$(OBJ)/$(USER_I)
+
+PSUTIL=$(SRC)/$(UTIL)
+POUTIL=$(OBJ)/$(UTIL)
+
+PSVIS=$(SRC)/$(VISION)
+POVIS=$(OBJ)/$(VISION)
+
+OBJETOS=msg_handling.o list_generic.o object_list.o matrix.o \
+train_create.o ocr.o character.o character_seed.o \
+word_seed.o letter.o line.o word.o text.o accent.o \
+punctuation.o training_object.o training_set.o training_img.o \
+image.o image_line.o image_object.o contour.o pre_img_processing.o \
+img_processing.o post_img_processing.o util_io_string.o \
+util_train.o util_ocr.o util_fann.o util_cv.o ann.o ann_base.o \
+ann_train.o ann_run.o oc2r_data_create oc2r_ann_train oc2r
+#ann_test.o 
+
+all: $(OBJETOS)
+
+###################### INICIA MODULO DE MSG_HANDLING #####################
+
+msg_handling.o: $(PSMSG)/msg_handling.c $(PSMSG)/msg_handling.h
+	#Compila tratamento de erros
+	
+	$(CC_F) -c $(PSMSG)/msg_handling.c -o $(POMSG)/msg_handling.o
+
+###################### FINALIZA MODULO DE ERROR_HANDLING###################
+
+
+###################### INICIA MODULO STRUCT#######################	
+
+list_generic.o: $(PSSTRUCT)/list_generic.c $(PSSTRUCT)/list_generic.h
+
+	#Compila a estrutura de dados list_generic
+	$(CC_F) -c $(PSSTRUCT)/list_generic.c -o \
+	$(POSTRUCT)/list_generic.o
+
+object_list.o: $(PSSTRUCT)/object_list.c $(PSSTRUCT)/object_list.h
+	
+	#Compila a estrutura de dados ObjetoDalista
+	$(CC_F) -c $(PSSTRUCT)/object_list.c -o $(POSTRUCT)/object_list.o
+	
+matrix.o: $(PSSTRUCT)/matrix.c $(PSSTRUCT)/matrix.h
+	#Compila a estrutura de dados matrix
+	$(CC_F) -c $(PSSTRUCT)/matrix.c -o $(POSTRUCT)/matrix.o
+	
+##################### FINALIZA MODULO DE LISTA_STRUCT ######################
+
+
+##################### INICIA MODULO DE OCR_TRAINING#############################
+
+#Compilacao da logicaTreino
+
+train_create.o: $(PSOCRT)/train_create.c $(PSOCRT)/train_create.h
+
+	#Compila train_create
+	$(CC_F) -c $(PSOCRT)/train_create.c -o $(POOCRT)/train_create.o
+	
+	
+##################### FINALIZA MODULO DE LOGICA #############################	
+
+
+###################### INICIA MODULO OCR########################
+
+ocr.o: $(PSOCR)/ocr.c $(PSOCR)/ocr.h
+	
+	#Compila ocr
+	$(CC_F) -c $(PSOCR)/ocr.c -o $(POOCR)/ocr.o
+
+
+character.o: $(PSOCR)/character.c $(PSOCR)/character.h
+	
+	#Compila character
+	$(CC_F) -c $(PSOCR)/character.c -o $(POOCR)/character.o
+	
+character_seed.o: $(PSOCR)/character_seed.c $(PSOCR)/character_seed.h
+	
+	#Compila character_seed
+	$(CC_F) -c $(PSOCR)/character_seed.c -o $(POOCR)/character_seed.o
+	
+
+word_seed.o: $(PSOCR)/word_seed.c $(PSOCR)/word_seed.h
+	
+	#Compila word_seed
+	$(CC_F) -c $(PSOCR)/word_seed.c -o $(POOCR)/word_seed.o
+	
+letter.o: $(PSOCR)/letter.c $(PSOCR)/letter.h
+	
+	#Compila a estrutura de dados letter
+	$(CC_F) -c $(PSOCR)/letter.c -o $(POOCR)/letter.o
+
+line.o: $(PSOCR)/line.c $(PSOCR)/line.h
+	
+	#Compila a estrutura de dados line
+	$(CC_F) -c $(PSOCR)/line.c -o $(POOCR)/line.o
+
+word.o: $(PSOCR)/word.c $(PSOCR)/word.h
+	
+	#Compila a estrutura de dados word
+	$(CC_F) -c $(PSOCR)/word.c -o $(POOCR)/word.o
+
+text.o: $(PSOCR)/text.c $(PSOCR)/text.h
+	
+	#Compila a estrutura de dados text
+	$(CC_F) -c $(PSOCR)/text.c -o $(POOCR)/text.o
+
+accent.o: $(PSOCR)/accent.c $(PSOCR)/accent.h
+	
+	#Compila a estrutura de dados accent
+	$(CC_F) -c $(PSOCR)/accent.c -o $(POOCR)/accent.o
+
+punctuation.o: $(PSOCR)/punctuation.c $(PSOCR)/punctuation.h
+	
+	#Compila a estrutura de dados punctuation
+	$(CC_F) -c $(PSOCR)/punctuation.c -o $(POOCR)/punctuation.o
+
+##################### FINALIZA MODULO DE OCR ######################
+
+##################### INICIA MODULO DE DATA_PROCESS #####################
+
+training_object.o: $(PSDATAP)/training_object.c $(PSDATAP)/training_object.h
+	
+	#Compila a estrutura de dados training_object
+	$(CC_F) -c $(PSDATAP)/training_object.c -o $(PODATAP)/training_object.o
+
+training_set.o: $(PSDATAP)/training_set.c $(PSDATAP)/training_set.h
+	
+	#Compila a estrutura de dados training_set
+	$(CC_F) -c $(PSDATAP)/training_set.c -o $(PODATAP)/training_set.o
+	
+training_img.o: $(PSDATAP)/training_img.c $(PSDATAP)/training_img.h
+
+	#Compila a estrutura de dados training_img
+	$(CC_F) -c $(PSDATAP)/training_img.c -o $(PODATAP)/training_img.o
+
+##################### FINALIZA MODULO DE DATA_PROCESS ###################
+	
+
+##################### INICIA MODULO DE VISAO ##############################
+
+image.o: $(PSVIS)/image.c $(PSVIS)/image.h
+	
+	#Compila a estrutura de dados image
+	$(CC_F) -c $(PSVIS)/image.c -o $(POVIS)/image.o	
+
+image_line.o: $(PSVIS)/image_line.c $(PSVIS)/image_line.h
+	
+	#Compila a estrutura de dados image_line
+	$(CC_F) -c $(PSVIS)/image_line.c -o $(POVIS)/image_line.o	
+
+contour.o: $(PSVIS)/contour.c $(PSVIS)/contour.h
+	
+	#Compila a estrutura de dados contour
+	$(CC_F) -c $(PSVIS)/contour.c -o $(POVIS)/contour.o
+
+image_object.o: $(PSVIS)/image_object.c $(PSVIS)/image_object.h
+	
+	#Compila a estrutura de dados image_object
+	$(CC_F) -c $(PSVIS)/image_object.c -o $(POVIS)/image_object.o
+
+pre_img_processing.o: $(PSVIS)/pre_img_processing.c $(PSVIS)/pre_img_processing.h
+	
+	#Compila pre_img_processing
+	$(CC_F) -c $(PSVIS)/pre_img_processing.c -o $(POVIS)/pre_img_processing.o
+
+img_processing.o: $(PSVIS)/img_processing.c $(PSVIS)/img_processing.h
+	
+	#Compila img_processing
+	$(CC_F) -c $(PSVIS)/img_processing.c -o $(POVIS)/img_processing.o
+
+post_img_processing.o: $(PSVIS)/post_img_processing.c $(PSVIS)/post_img_processing.h
+	
+	#Compila post_img_processing
+	$(CC_F) -c $(PSVIS)/post_img_processing.c -o $(POVIS)/post_img_processing.o
+	
+
+##################### FINALIZA MODULO DE VISAO #############################
+
+
+
+##################### INICIA MODULO DE UTIL ################################
+
+util_io_string.o: $(PSUTIL)/util_io_string.c $(PSUTIL)/util_io_string.h
+	
+	#Compila util_train
+	$(CC_F) -c $(PSUTIL)/util_io_string.c -o $(POUTIL)/util_io_string.o
+
+util_train.o: $(PSUTIL)/util_train.c $(PSUTIL)/util_train.h
+	
+	#Compila util_train
+	$(CC_F) -c $(PSUTIL)/util_train.c -o $(POUTIL)/util_train.o
+	
+util_ocr.o: $(PSUTIL)/util_ocr.c $(PSUTIL)/util_ocr.h
+	
+	#Compila util_ocr
+	$(CC_F) -c $(PSUTIL)/util_ocr.c -o $(POUTIL)/util_ocr.o
+	
+util_fann.o: $(PSUTIL)/util_fann.c $(PSUTIL)/util_fann.h
+	#Compila util_fann
+	$(CC_F) -c $(PSUTIL)/util_fann.c -o $(POUTIL)/util_fann.o
+
+util_cv.o: $(PSUTIL)/util_cv.c $(PSUTIL)/util_cv.h
+	#Compila util_cv
+	$(CC_F) -c $(PSUTIL)/util_cv.c -o $(POUTIL)/util_cv.o
+
+	
+##################### INICIA MODULO DE INTERFACE COM USUARIO ################
+
+#Compilacao dos arquivos de interface com usuario
+#janelaTreino.o: $(SRC)/user_interface/janelaTreino.c controladorJanelaTreino.o
+#	#Compila janelaTreino.c
+#	$(CC) -c -g $(SRC)/user_interface/janelaTreino.c -o \
+#	$(OBJ)/user_interface/janelaTreino.o -I /usr/local/include \
+#	-L/usr/local/lib -lopencv_highgui -lopencv_core -lopencv_imgproc \
+#	`pkg-config --cflags --libs libglade-2.0 gtk+-2.0 gmodule-2.0`
+
+#Compila JanelaDialog
+#janelaDialog.o: $(SRC)/user_interface/janelaDialog.c
+#	#Compila janelaDialog.c
+#	$(CC) -c $(SRC)/user_interface/janelaDialog.c -o \
+#	$(OBJ)/user_interface/janelaDialog.o -I /usr/local/include \
+#	-L/usr/local/lib `pkg-config --cflags --libs libglade-2.0 gtk+-2.0 gmodule-2.0`
+	
+#Compilacao dos arquivos de interface com usuario
+#controladorJanelaTreino.o: $(SRC)/user_interface/controladorJanelaTreino.c \
+#	$(SRC)/user_interface/controladorJanelaTreino.h janelaTreino.o \
+#	janelaDialog.o list_generic.o logicaTreino.o pre_img_processing.o
+#	#Compila controladorJanelaTreino.c
+#	$(CC) -c $(SRC)/user_interface/controladorJanelaTreino.c -o \
+#	$(OBJ)/user_interface/controladorJanelaTreino.o -I /usr/local/include \
+#	-L/usr/local/lib `pkg-config --cflags --libs libglade-2.0 gtk+-2.0 gmodule-2.0`
+
+##################### FINALIZA MODULO DE INTERFACE COM USUARIO ################
+
+##################### INICIA MODULO Brain ##########################
+
+#Compilacao da estrutura ann
+ann.o: $(PSBRAIN)/ann.c $(PSBRAIN)/ann.h
+	#compila ann.c
+	$(CC_F) -c $(PSBRAIN)/ann.c -o $(POBRAIN)/ann.o
+
+
+#Compilacao da estrutura ann_base
+ann_base.o: $(PSBRAIN)/ann_base.c $(PSBRAIN)/ann_base.h
+	#compila ann_base.c
+	$(CC_F) -c $(PSBRAIN)/ann_base.c -o $(POBRAIN)/ann_base.o
+	
+ann_train.o: $(PSBRAIN)/ann_train.c $(PSBRAIN)/ann_train.h
+	#Compila ann_train.c
+	$(CC_F) -c $(PSBRAIN)/ann_train.c -o $(POBRAIN)/ann_train.o
+	
+ann_run.o: $(PSBRAIN)/ann_run.c $(PSBRAIN)/ann_run.h
+	#Compila ann_run.c
+	$(CC_F) -c $(PSBRAIN)/ann_run.c -o $(POBRAIN)/ann_run.o
+
+ann_test.o: $(PSBRAIN)/ann_test.c $(PSBRAIN)/ann_test.h
+	#Compila ann_test.c
+	$(CC_F) -c $(PSBRAIN)/ann_test.c -o $(POBRAIN)/ann_test.o
+
+##################### INICIA MODULO DE MAIN ##########################
+
+#Compila treinoMain
+oc2r_create_chars_img: $(PSMAIN)/oc2r_create_chars_img.c
+	
+	#Compila oc2r_create_chars_img
+	$(CC_F) $(PSMAIN)/oc2r_create_chars_img.c $(POVIS)/pre_img_processing.o \
+	$(POVIS)/image.o $(POUTIL)/util_ocr.o $(POUTIL)/util_cv.o \
+	$(POUTIL)/util_io_string.o $(POMSG)/msg_handling.o \
+	-I/usr/include -L/usr/lib -lopencv_highgui -lopencv_core \
+	-lopencv_imgproc -o run/oc2r_create_chars_img
+
+
+oc2r_data_create: $(PSMAIN)/oc2r_data_create.c
+	
+	#Compila oc2r_data_create
+	$(CC_F) $(PSMAIN)/oc2r_data_create.c $(POOCRT)/train_create.o \
+	$(PODATAP)/training_set.o $(PODATAP)/training_img.o $(POUTIL)/util_train.o \
+	$(PODATAP)/training_object.o $(POVIS)/post_img_processing.o $(POVIS)/img_processing.o \
+	$(POVIS)/pre_img_processing.o $(POUTIL)/util_fann.o $(POSTRUCT)/object_list.o \
+	$(POOCR)/text.o $(POOCR)/line.o $(POOCR)/word_seed.o $(POOCR)/character_seed.o \
+	$(POOCR)/character.o $(POOCR)/word.o $(POOCR)/letter.o $(POVIS)/image_line.o \
+	$(POOCR)/accent.o $(POOCR)/punctuation.o $(POVIS)/image_object.o $(POVIS)/image.o \
+	$(POSTRUCT)/list_generic.o $(POVIS)/contour.o $(POBRAIN)/ann_base.o \
+	$(POBRAIN)/ann.o $(POBRAIN)/ann_train.o $(POUTIL)/util_ocr.o $(POUTIL)/util_cv.o \
+	$(POUTIL)/util_io_string.o $(POSTRUCT)/matrix.o $(POMSG)/msg_handling.o \
+	-I/usr/include -L/usr/lib -lopencv_highgui -lopencv_core \
+	-lopencv_imgproc -lfann -lm -o run/oc2r_data_create
+
+	
+oc2r_ann_train: $(PSMAIN)/oc2r_ann_train.c
+	
+	#Compila oc2r_ann_train
+	$(CC_F) $(PSMAIN)/oc2r_ann_train.c $(POUTIL)/util_fann.o $(POSTRUCT)/object_list.o \
+	$(POSTRUCT)/list_generic.o $(POBRAIN)/ann_base.o $(POBRAIN)/ann.o \
+	$(POBRAIN)/ann_train.o $(POUTIL)/util_ocr.o \
+	$(POUTIL)/util_io_string.o $(POSTRUCT)/matrix.o $(POMSG)/msg_handling.o \
+	-I/usr/include -L/usr/lib -lopencv_highgui -lopencv_core \
+	-lopencv_imgproc -lfann -lm -o run/oc2r_ann_train
+
+	
+oc2r: $(PSMAIN)/oc2r.c
+
+	#Compila oc2r
+	$(CC_F) $(PSMAIN)/oc2r.c $(POOCR)/ocr.o \
+	$(POUTIL)/util_train.o $(POVIS)/post_img_processing.o \
+	$(POVIS)/img_processing.o $(POVIS)/pre_img_processing.o $(POUTIL)/util_fann.o \
+	$(POSTRUCT)/list_generic.o $(POSTRUCT)/object_list.o $(POOCR)/text.o $(POOCR)/line.o \
+	$(POOCR)/word_seed.o $(POOCR)/character_seed.o $(POOCR)/word.o $(POOCR)/letter.o \
+	$(POOCR)/accent.o $(POOCR)/punctuation.o $(POOCR)/character.o $(POVIS)/image_line.o \
+	$(POVIS)/image_object.o $(POVIS)/image.o $(POVIS)/contour.o $(POBRAIN)/ann_base.o \
+	$(POBRAIN)/ann.o $(POBRAIN)/ann_run.o $(POBRAIN)/ann_train.o $(POUTIL)/util_ocr.o \
+	$(POUTIL)/util_cv.o $(POUTIL)/util_io_string.o $(POSTRUCT)/matrix.o \
+	$(POMSG)/msg_handling.o -I/usr/include -L/usr/lib -lopencv_highgui -lopencv_core \
+	-lopencv_imgproc -lfann -lm -o run/oc2r
+
+##################### FINALIZA MODULO DE TREINAMENTO ##########################
+
+
+clean:
+	rm -f `find . -iname "*.o"`
